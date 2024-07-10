@@ -89,13 +89,13 @@ public class PlacePool : MonoBehaviour
     {
         if (_aRRaycastManager.Raycast(finger.currentTouch.screenPosition,_hits,TrackableType.PlaneWithinPolygon))
         {
-            foreach (ARRaycastHit hit in _hits)
-            {
-                Pose pose = hit.pose;
+            
+                Pose pose = _hits[0].pose;
                 GameObject obj = Instantiate(_poolPrefab, new Vector3( pose.position.x, pose.position.y-1, pose.position.z), pose.rotation);
                 _setPool = obj;
-            }
-            DisablePlanes();
+                DisablePlanes();
+
+           
 
         }
     }
