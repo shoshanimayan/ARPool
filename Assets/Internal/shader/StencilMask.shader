@@ -14,6 +14,7 @@ Shader "Custom/StencilMask"
             Blend Zero One
             ZWrite Off
 
+
             Stencil
             {
                 Ref [_StencilID]
