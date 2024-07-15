@@ -11,6 +11,9 @@ public class PlacePool : MonoBehaviour
     [SerializeField] private GameObject _poolPrefab;
     [SerializeField] private Canvas _setUpCanvas;
     [SerializeField] private Canvas _poolCanvas;
+    [SerializeField] private GameObject _poolUI;
+    [SerializeField] private GameObject _settingsUI;
+
     private GameObject _setPool;
     private ARAnchor _anchor;
     private ARRaycastManager _aRRaycastManager;
@@ -30,7 +33,8 @@ public class PlacePool : MonoBehaviour
         _aRRaycastManager = GetComponent<ARRaycastManager>();
         _planeManager = GetComponent<ARPlaneManager>();
         _anchorManager = GetComponent<ARAnchorManager>();
-       
+        _poolUI.SetActive(true);
+        _settingsUI.SetActive(false);
 
     }
 
@@ -75,6 +79,8 @@ public class PlacePool : MonoBehaviour
 
     private void EnablePlanes()
     {
+        _poolUI.SetActive(true);
+        _settingsUI.SetActive(false);
         _poolCanvas.enabled = false;
         _setUpCanvas.enabled = true;
         foreach (var plane in _planeManager.trackables)
@@ -105,5 +111,19 @@ public class PlacePool : MonoBehaviour
         Destroy(_setPool);
         _setPool = null;
         EnablePlanes();
+    }
+
+    public void ShowSettings(bool enable)
+    { 
+        _poolUI.SetActive(!enable);
+        _settingsUI.SetActive(enable);
+    }
+
+    public void ScalePool(float size)
+    {
+        if (_setPool !=null)
+        {
+            _setPool.transform.localScale = new Vector3(size, _setPool.transform.localScale.y, size);
+        }
     }
 }
