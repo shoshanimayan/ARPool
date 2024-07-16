@@ -98,7 +98,11 @@ public class PlacePool : MonoBehaviour
             
                 Pose pose = _hits[0].pose;
                 GameObject obj = Instantiate(_poolPrefab, new Vector3( pose.position.x, pose.position.y-1, pose.position.z), pose.rotation);
-                _setPool = obj;
+            if (obj.GetComponent<ARAnchor>() == null)
+            {
+                obj.AddComponent<ARAnchor>();
+            }
+            _setPool = obj;
                 DisablePlanes();
 
            
